@@ -1,0 +1,41 @@
+#include <stdio.h>
+
+int main(int argc, char *argv[])
+{
+	int distance = 100;
+	float power = 2.345f;
+	double super_power = 56789.4532;
+	char initial = 'A';
+	char first_name[] = "Zed";
+	char last_name[] = "Shaw";
+	int lprec = 1;
+	int rprec = 4;
+
+	printf("You are %d miles away.\n", distance);
+	printf("You have %f levels of power.\n", power);
+	printf("You have %f awesome super powers.\n", super_power);
+	printf("I have an initial %c.\n", initial);
+	printf("I have a first name %s.\n", first_name);
+	printf("I have a last name %s.\n", last_name);
+	printf("My whole name is %s %c. %s.\n\n",
+			first_name, initial, last_name);
+
+	printf(	"100 miles is\n"
+			"%x in hex.\n"
+			"%o in octal.\n\n",
+			distance,
+			distance);
+
+	printf(	"%f is a float.\n"
+			"Default precision is 6, but we can change it.\n"
+			"%1.1f is the same float, with precision 1\n\n"
+			"We can also use variables to assign the format %%*.*f \n"
+			"%*.*f\n"
+			"%2$*.*f\n",
+			power,
+			power,
+			lprec, rprec, power,
+			lprec, rprec, power); 	
+
+	return 0;
+}

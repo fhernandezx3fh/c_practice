@@ -1,0 +1,99 @@
+#include <stdio.h>
+#include <ctype.h>
+#include <string.h>
+
+//********** Print an integer ************
+void printInt(int x)
+{
+	printf("&x address: %p\n", &x);	
+	printf("[printInt]Integer is: %d\n", x);
+}
+
+
+void printStringPtr(char *str1)
+{
+	printf("&str1 address: %p\n", &str1);		
+	printf("[printStringPtr]String is: %s\n", str1);
+	printf("[printStringPtr]String size is: %ld\n", strlen(str1));
+}
+
+void printFltarr(float fltarray[])
+{
+	printf("&fltarray[] address: %p\n", &fltarray);
+	printf("[fltarray]float[0] is: %f\n", fltarray[0]);
+	printf("[fltarray]float[1]: %f\n", fltarray[1]);
+	printf("[fltarray]float[2]: %f\n", fltarray[2]);
+}
+
+void printChar(char chr)
+{
+		
+	printf("[printChar]Char: %c\n", chr);
+}
+
+void printString(char str[10])
+{
+	printf("[printString]String is: %s\n", str);
+}
+
+int main(int argc, char *argv[])
+{
+	int num1 = 66;
+	float fltarr[3] = {1.1, 1.2, 1.3};
+	char name[10] = "Fernando";
+	char name2[] = "Fernando";
+	char flxname[] = "Fernando Hernandez";	
+	char *nPtr = name;
+
+//********** Print the addresses of all the variables ************	
+	printf("\n******** Printing the addresses of vars **********\n");	
+	printf("&num1: %p\n", &num1);
+	printf("&fltarr: %p\n", &fltarr);
+	printf("&name: %p\n", &name);
+	printf("&flxname: %p\n", &flxname);
+	printf("nPtr: %p\n", nPtr);
+
+//********** Print the sizes of all the variables ************
+	printf("\n******** Printing the sizes of vars **********\n");		
+	printf("num1: %ld\n", sizeof(num1));
+	printf("fltarr: %ld\n", sizeof(fltarr));
+	printf("name: %ld\n", sizeof(name));
+	printf("flxname: %ld\n", sizeof(flxname));
+	printf("nPtr: %ld\n", sizeof(nPtr));
+
+//********** Use the functions to print all of the variables ************
+	printf("\n******** Printing using functions **********\n");		
+	printInt(num1);
+	printFltarr(fltarr);
+	printChar('a');
+	printChar(name[2]);
+	printString(name);
+
+//********** You need to use a pointer for printing variable length strings ************
+	printf("\n******** Printing using functions with ptr params **********\n");			
+	printf("Setting nPtr = name[10]\n");
+	printStringPtr(nPtr);
+	nPtr = flxname;
+	printf("Setting nPtr = flxname[]\n");
+	printStringPtr(nPtr);	
+
+	printf("\n******** Call function by reference **********\n");			
+	printf("using name as param\n");
+	printStringPtr(name2);
+	printf("using flxname as param\n");
+	printStringPtr(flxname);
+
+//********** Call function by value: printStringPtr ************
+/*	In the call-by-value method, the called function creates new 
+	variables to store the value of the arguments passed to it. 
+	Therefore, the called function uses a copy of the actual 
+	arguments to perform its intended task.						*/
+	printf("\n******** Call function by value **********\n");			
+	printf("printStringPtr(\"Fernando Hernandez\")\n");
+	printStringPtr("Fernando Hernandez");
+	nPtr = flxname;
+	printf("printStringPtr(\"Hello world!!\")\n");
+	printStringPtr("Hello world!!");
+
+	return 0;	
+}

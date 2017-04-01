@@ -1,0 +1,43 @@
+#include <stdio.h>
+#include <ctype.h>
+#include <string.h>
+
+void printchrarr(char str[])
+{
+	printf("\n");
+	printf("&str[]: %p\n", &str);	
+	printf("String is: %s\n", str);
+}
+
+void printString(char *str)
+{
+	printf("\n");		
+	printf("&str: %p\n",&str);		
+	printf("String is: %s\n", str);
+}
+
+void printString2(char *str[])
+{
+	printf("\n");		
+	printf("&str[]: %p\n",&str);		
+	printf("String is: %s\n", str);
+}
+
+
+int main(int argc, char *argv[])
+{
+	char name[] = "Fernando";
+	
+	printf("&name[]: %p\n", &name);		
+
+	printchrarr("printchrarr(char str[])");
+	printchrarr(name);
+
+	printString("printString(char *str)");
+	printString(name);
+
+	//printString2("printString2(char *str[])");
+	//printString2(name);
+
+	return 0;	
+}
