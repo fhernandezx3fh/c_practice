@@ -1,8 +1,14 @@
-CC=gcc
+# compiler flags:
+#  -g    adds debugging information to the executable file
+#  -Wall turns on most, but not all, compiler warnings
+CC = gcc
+CFLAGS = -Wall -g
+TARGET = ex1
 
-CFLAGS=-Wall -g
+all:	$(TARGET)
+
+$(TARGET): $(TARGET).o
+	$(CC) $(CFLAGS) -o $(TARGET).exe $(TARGET).c
 
 clean:
-	rm -f ex1.exe
-
-all:	ex1
+	$(RM) $(TARGET).exe
