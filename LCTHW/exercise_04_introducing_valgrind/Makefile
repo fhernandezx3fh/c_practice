@@ -1,6 +1,14 @@
-CFLAGS=-Wall -g
+# compiler flags:
+#  -g    adds debugging information to the executable file
+#  -Wall turns on most, but not all, compiler warnings
+CC = gcc
+CFLAGS = -Wall -g
+TARGET = ex4
+
+all:	clean $(TARGET)
+
+$(TARGET): $(TARGET).o
+	$(CC) $(CFLAGS) -o $(TARGET).exe $(TARGET).c
 
 clean:
-	rm -f ex3
-
-all:	ex3	ex3_break1	ex3_break2
+	$(RM) $(TARGET).exe
