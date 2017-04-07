@@ -5,7 +5,7 @@ CC = gcc
 CFLAGS = -Wall -g
 TARGET = ex1
 
-all:	$(TARGET)
+all:	clean $(TARGET)
 
 $(TARGET): $(TARGET).o
 	$(CC) $(CFLAGS) -o $(TARGET).exe $(TARGET).c
