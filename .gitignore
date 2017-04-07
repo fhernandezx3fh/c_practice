@@ -1,0 +1,4 @@
+# Ignore any object or built excecutibles
+# Assume that executible will be made on target machine
+*.o
+*.exe
