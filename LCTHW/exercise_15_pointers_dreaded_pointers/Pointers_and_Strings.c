@@ -59,7 +59,7 @@ int main(int argc, char *argv[])
 
 	//address of pointer
 	printf("base chrb address = %p\n", chrb);
-	printf("chrb = %c\n", chrb[3]);
+	printf("chrb[3] = %c\n", chrb[3]);
 
 	return 0;
 }

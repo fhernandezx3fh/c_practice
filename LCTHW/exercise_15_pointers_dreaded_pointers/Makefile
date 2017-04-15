@@ -3,7 +3,7 @@
 #  -Wall turns on most, but not all, compiler warnings
 CC = gcc
 CFLAGS = -Wall -g
-TARGET = ex8
+TARGET = Pointers_and_Strings_2
 
 all:	clean $(TARGET)
 
