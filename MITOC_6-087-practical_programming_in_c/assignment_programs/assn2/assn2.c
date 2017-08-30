@@ -65,31 +65,92 @@ int main(void) // main entry point
    * white space (includes space, tab, newline)
    */
 
+  printf("\n");
   char c = 'a';
   int truth = 0;
   truth = ('a' >=  c && c <= 'z');
-  printf("%d\n", truth);
+  printf( "%c is a lower case letter [a-z]\n"
+          "truth = %d\n\n",c, truth);
   
   truth = ('A' >=  c && c <= 'Z');
-  printf("%d\n", truth);
+  printf( "%c is not an upper case letter [A-Z]\n"
+          "truth = %d\n\n",c, truth);
 
   truth = ('0' >=  c && c <= '9');
-  printf("%d\n", truth);
+  printf( "%c is not a digit [0-9]\n"
+          "truth = %d\n\n",c, truth);
 
   truth = (c==' ' || c=='\t' || c=='\n');
-  printf("%d\n", truth);
+  printf( "%c is not a whitespace [space, tab, newline]\n"
+          "truth = %d\n\n",c, truth);
 
   /* Problem 2.3 (Bitwise Operations)
    * Consider int val=0xCAFE;
+   * C    A    F    E
    * 1100 1010 1111 1110
-   * write bitwise operations that do the following:
-   * test if at least 3 of the last 4 LSB are on
-   * reverse the byte order (ie 0xFECA)
-   * rotate fourbits (ie ECAF)
+   *
+   * 1. write bitwise operations that do the following:
+   *    test if at least 3 of the last 4 LSB are on
+   *    0111 7
+   *    1011 11
+   *    1101 13
+   *    1110 14
+   * 
+   * 2. reverse the byte order (ie 0xFECA)
+   * 3. rotate fourbits (ie ECAF)
   */
   int val = 0xCAFE;
-  int lastByte = val & 0x7;
-  printf("%d\n", lastByte);
+  int lastNib = val & 0xF;
+  truth = (lastNib == 7 || lastNib > 10);
+  printf("val = 0x%04X\n", val);
+  printf( "Test: At least 3 of 4 of the LSB are on\n"
+          "truth = %d\n\n", truth);
+  
+  int valTmp = val;
+  int lastByte = valTmp & 0xFF;
+  lastByte = lastByte << 8; //shifting lastByte to the MSB position
+  valTmp = valTmp>>8;       //shifting MSB to LSB position
+  valTmp |= lastByte;
+  printf( "Byte-swap complete:\n"
+          "val = 0x%04X\n"
+          "valTmp = 0x%04X\n\n",
+          val, valTmp);
 
+  valTmp = (val & 0xFFF0) >> 4; //extracting 0xCAF and shifting right
+  lastNib = lastNib << 12;      //shifting 0x000E left 12
+  valTmp |= lastNib;            //0x0CAF | 0xE000 = 0xECAF
+  printf( "Rotate 4 bits complete:\n"
+          "val = 0x%04X\n"
+          "valTmp = %04X\n\n",
+          val, valTmp);
+
+
+  /* Problem 2.4 (Operation precedence)
+   * Using precedence rules, evaluate the following expressions
+   * Assume (x=0xFF33, MASK=0xFF00)
+   * Expression: c= x & MASK==0;
+   *             c= x & (MASK==0);
+   *             c= x & 0;
+   *             c= 0
+   *             Ans: Precedence is '=='>'&'>'='
+   * Assume(x=10, y=2, z=2)
+   * Expression: z = y = x++ + ++y * 2;
+   *             z = y = (x++) + ((++y) * 2)
+   *             z = 10 + (3 * 2), then increment x
+   *             z = 17, x = 11, y = 2
+   *             ans: Precedence is '++'>'*'>'+'
+   * Assume(x=10, y=4, z=1)
+   * Expression: y >>= x & 0x2 && z
+   *             y >>= (x & 0x2) && z
+   *             y >>= 0x2 && z  //remember, if it is not 0, then it is TRUE!!
+   *             y >>= 1
+   *             y = 2
+   *             ans: precedence is '&'>'&&'>'>>='
+  */             
+
+
+  /* Problem 2.5 (Fixing Errors)
+   * Using precedence rules, evaluate the following expressions
+  
   return 0; // exit (0 => success)
 }
