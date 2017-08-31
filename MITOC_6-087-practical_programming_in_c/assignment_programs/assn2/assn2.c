@@ -146,11 +146,38 @@ int main(void) // main entry point
    *             y >>= 1
    *             y = 2
    *             ans: precedence is '&'>'&&'>'>>='
-  */             
+   */             
 
 
   /* Problem 2.5 (Fixing Errors)
-   * Using precedence rules, evaluate the following expressions
+   * Determine if the following statements have any errors. 
+   * If so, highlight them and explain why
+   *
+   * int 2nd_value=10;
+   *     2nd_value variable cannot start with a number.
+   *
+   * Assume (x=0,y=0,alliszero=1). 
+   *    alliszero =(x=1) && (y=0);
+   * Should be:
+   *    alliszero = ((x==1) && (y==0));
+   * 
+   * Assume (x=10,y=3,z=0;). y=++x+y;z=z−−>x;
+   *    y=++x+y;
+   *    z=z−−>x;
+   *  Nothing wrong here, just simplifies to:
+   *    y=++x+y;
+   *    z=(z−−)>x;
+   *
+   * Assume that we want to test if last four bits of x are on. 
+   * (int MASK=0xF;ison=x&MASK==MASK)
+   *  
+   *  == higher precedence than &
+   *    ison=x&MASK==MASK
+   *  Simplifies to:
+   *    ison=x&(MASK==MASK)
+   *  Should be:
+   *    ison=(x&MASK)==MASK
+   */
   
   return 0; // exit (0 => success)
 }
