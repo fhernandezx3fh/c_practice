@@ -1,11 +1,15 @@
 #Makefile for creating object files
 
 CC = gcc
-CFLAGS = -g -Wall
-TARGET = assn3
+CFLAGS = -g -Wall -O0
+TARGETS = assn3.p3.3 prob1 assn3.p3.4
 
-$(TARGET): $(TARGET).c
-	gcc -g -O0 -Wall $(TARGET).c -o $(TARGET).o
+all:
+	for i in $(TARGETS); do \
+		  $(CC) $(CFLAGS) $$i.c -o $$i.o; \
+	done
 
 clean:
-	$(RM) $(TARGET).o
+	for i in $(TARGETS); do \
+		$(RM) $$i.o; \
+	done
